@@ -15,3 +15,12 @@
       # increase_player_score by 1
       # reduce_player_life by 1
   
+require_relative './players'
+
+player1 = Players.new(3, 0)
+player2 = Players.new(3, 0)
+
+puts player2.life_remaining
+player2.life_remaining -= 1
+
+puts player2.life_remaining
