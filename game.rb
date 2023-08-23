@@ -1,61 +1,42 @@
-# game
-# questions = { question: '...', answer : '..' }
-# players 
-  # curr_question
-  # current_player 
-  # winner 
-    # METHODS
-      # add 2 players - create 2 player instances?
-      # increase_player_score by 1
-      # reduce_player_life by 1
-  
-class game
-  
-  questions = [
-  {"question 1"=>"What does 5 plus 3 equal?", "answer"=>8},
-  {"question 2"=>"What is the square root of 144?", "answer"=>12.0},
-  {"question 3"=>"What is 9 multiplied by 7?", "answer"=>63},
-  {"question 4"=>"What is the capital of France?", "answer"=>"Paris"},
-  {"question 5"=>"How many planets are in our solar system?", "answer"=>8},
-  {"question 6"=>"What is the largest mammal?", "answer"=>"Blue Whale"},
-  {"question 7"=>"What is the chemical symbol for gold?", "answer"=>"Au"},
-  {"question 8"=>"What is 15 divided by 3?", "answer"=>5},
-  {"question 9"=>"What is the tallest mountain in the world?", "answer"=>"Mount Everest"},
-  {"question 10"=>"What is the freezing point of water in Celsius?", "answer"=>0},
-  {"question 11"=>"What is the national flower of Japan?", "answer"=>"Cherry Blossom"},
-  {"question 12"=>"What is the largest ocean on Earth?", "answer"=>"Pacific Ocean"},
-  {"question 13"=>"What is the boiling point of water in Fahrenheit?", "answer"=>212},
-  {"question 14"=>"What is the chemical symbol for oxygen?", "answer"=>"O"},
-  {"question 15"=>"What is the currency of Japan?", "answer"=>"Yen"},
-  {"question 16"=>"What is the smallest prime number?", "answer"=>2},
-  {"question 17"=>"What is the process of a liquid turning into a gas called?", "answer"=>"Evaporation"},
-  {"question 18"=>"What is the largest land animal?", "answer"=>"African Elephant"},
-  {"question 19"=>"What is the symbol for the element helium?", "answer"=>"He"},
-  {"question 20"=>"What is the capital of Australia?", "answer"=>"Canberra"},
-  {"question 21"=>"What is the smallest planet in our solar system?", "answer"=>"Mercury"},
-  {"question 22"=>"What is the freezing point of water in Fahrenheit?", "answer"=>32},
-  {"question 23"=>"What is the chemical symbol for carbon?", "answer"=>"C"},
-  {"question 24"=>"What is the currency of India?", "answer"=>"Rupee"},
-  {"question 25"=>"What is the square root of 25?", "answer"=>5},
-  {"question 26"=>"What is 8 divided by 2?", "answer"=>4},
-  {"question 27"=>"What is the chemical symbol for silver?", "answer"=>"Ag"},
-  {"question 28"=>"What is the largest bird in the world?", "answer"=>"Ostrich"},
-  {"question 29"=>"What is the process of a gas turning into a liquid called?", "answer"=>"Condensation"},
-  {"question 30"=>"What is the currency of the United Kingdom?", "answer"=>"Pound Sterling"},
-]
-
+class Game
   attr_accessor :questions, :players, :curr_question, :current_player, :winner
 
   def initialize()
-    @questions = questions
+    @questions = [
+      {"question": "What is 2 plus 3?", "answer": 5},
+      {"question": "What is 10 minus 7?", "answer": 3},
+      {"question": "What is 6 multiplied by 4?", "answer": 24},
+      {"question": "What is 15 divided by 3?", "answer": 5},
+      {"question": "What is 9 plus 6?", "answer": 15},
+      {"question": "What is 8 minus 4?", "answer": 4},
+      {"question": "What is 7 multiplied by 2?", "answer": 14},
+      {"question": "What is 18 divided by 2?", "answer": 9},
+      {"question": "What is 5 plus 8?", "answer": 13},
+      {"question": "What is 20 minus 10?", "answer": 10},
+      {"question": "What is 9 multiplied by 3?", "answer": 27},
+      {"question": "What is 16 divided by 4?", "answer": 4},
+      {"question": "What is 12 plus 7?", "answer": 19},
+      {"question": "What is 15 minus 9?", "answer": 6},
+      {"question": "What is 4 multiplied by 6?", "answer": 24},
+      {"question": "What is 21 divided by 7?", "answer": 3},
+      {"question": "What is 10 plus 5?", "answer": 15},
+      {"question": "What is 18 minus 12?", "answer": 6},
+      {"question": "What is 8 multiplied by 3?", "answer": 24},
+      {"question": "What is 30 divided by 5?", "answer": 6},
+    ]  
     @players = []
-    @current_player = players[0]
-    @curr_question = questions[0]
+    @current_player = []
+    @curr_question = nil
     @winner = nil
   end
 
   def add_players(player)
     @players.push(player)
+  end
+
+  def init_game 
+    puts "Welcome to the Math Quiz Game!"
+    @current_player = players[0]
   end
 
   def increase_player_score(player)
@@ -74,8 +55,24 @@ class game
     end
   end
 
-  
-  
+    def change_question
+      @curr_question = questions.sample
+    end
+
+    def check_winner
+      if players[0].life_remaining == 0
+        @winner = players[1]
+      elsif players[1].life_remaining == 0
+        @winner = players[0]
+      end
+    end
+
+      def display_winner
+        puts "----- GAME OVER -----"
+        puts "Player #{winner.player_number} wins with a score of #{winner.score}/3"
+        puts "Good bye!"
+      end
+
 
 end
 
